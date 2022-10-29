@@ -24,12 +24,13 @@ public class FlinkCDC {
         Properties properties = new Properties();
         properties.setProperty("scan.startup.mode", "initial");
         SourceFunction<String> sourceFunction = MySqlSource.<String>builder()
-                .hostname("1.15.115.151")
+                .hostname("localhost")
                 .port(3306)
                 .username("root")
-                .password("123456")
-                .databaseList("cdcservice")    // 监控的database
-                .tableList("cdcservice.stuinfo", "cdcservice.stuinfo_bar")    // 监控的table
+                .password("root")
+                .serverTimeZone("Asia/Shanghai")
+                .databaseList("test1")    // 监控的database
+                .tableList("user_table")    // 监控的table
                 .deserializer(new customDebeziumDS())    // 自定义返回数据格式
                 .debeziumProperties(properties)
                 .build();
